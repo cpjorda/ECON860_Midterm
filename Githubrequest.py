@@ -27,6 +27,7 @@ print(result)
 f.open("noduplicatedataset.csv", "r")
 users = f.read()
 f.close()
+
 for user in users:
 	user_url = access_point + "/users/" + user
 	result = json.loads(githubsession.get(user_url).text)
