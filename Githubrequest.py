@@ -1,8 +1,14 @@
+import urllib.request
+import os
+
 
 
 f = open("api_key", "r")
 api_key = f.read()
 f.close()
 
-print(api_key)
-#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
+
+if not os.path.exists("githubjsondata"):
+	os.mkdir("githubjsondata")
+
+urllib.request.urlopen()
