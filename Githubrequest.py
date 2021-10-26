@@ -1,7 +1,8 @@
 import json
 import requests
-
+import csv
 import os
+import pandas
 
 f = open("api_key", "r")
 api_key = f.read()
@@ -20,16 +21,13 @@ githubsession.auth = (username, api_key)
 
 access_point = "https://api.github.com"
 
-rate_limit_url = access_point + "/rate_limit"
-result = json.loads(githubsession.get(rate_limit_url).text)
+file = csv.reader(open("midtermparsedfiles/noduplicatedataset.csv"), delimiter = ",")
+names = list(file)
 
-print(result)
-f.open("noduplicatedataset.csv", "r")
-users = f.read()
-f.close()
-
-for user in users:
-	user_url = access_point + "/users/" + user
-	result = json.loads(githubsession.get(user_url).text)
-	print(user)
-	print(result['public_repos'])
+for i in range (0,640):
+	user_url = names[i][0]
+	result = json.loads(githubsession.get(access_point + "/users/" + user_url).text)
+	f = open("githubjsondata/" + user_url + ".json", "w")
+	f.write(json.dumps(result))
+	f.close()
+	
