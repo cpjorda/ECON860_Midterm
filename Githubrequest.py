@@ -19,11 +19,10 @@ githubsession = requests.Session()
 githubsession.auth = (username, api_key)
 
 
-access_point = "https://api.github.com"
 
 file = csv.reader(open("midtermparsedfiles/noduplicatedataset.csv"), delimiter = ",")
 names = list(file)
-
+access_point = "https://api.github.com"
 for i in range (0,640):
 	user_url = names[i][0]
 	result = json.loads(githubsession.get(access_point + "/users/" + user_url).text)
